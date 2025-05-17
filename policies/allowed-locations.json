@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "displayName": "Allowed Locations",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy restricts the locations where resources can be deployed.",
+    "parameters": {
+      "listOfAllowedLocations": {
+        "type": "Array",
+        "metadata": {
+          "description": "The list of locations that can be specified when deploying resources.",
+          "displayName": "Allowed locations"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "location",
+          "in": "[parameters('listOfAllowedLocations')]"
+        }
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
